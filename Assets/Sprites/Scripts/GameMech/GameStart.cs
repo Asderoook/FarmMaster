@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameStart : MonoBehaviour
@@ -8,11 +6,6 @@ public class GameStart : MonoBehaviour
     public ChestFilling chestFilling;
     private ManagerInventory managerInventory;
     private StartDish startDish;
-
-    public void GameWon()
-    {
-        Debug.Log("Win");
-    }
 
     private void Start()
     {

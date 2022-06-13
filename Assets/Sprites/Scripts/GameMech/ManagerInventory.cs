@@ -1,10 +1,11 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ManagerInventory : MonoBehaviour
 {
     public int[] dishes { get; set; }
+    public static event Action gameWon;
     private DataBase dataBase;
     private Inventory inventory;
     private GameStart gameStart;
@@ -25,7 +26,7 @@ public class ManagerInventory : MonoBehaviour
             result[i] = items[i].id;
         System.Array.Sort(result);
         if (ArrayEqual(dishes, result))
-            gameStart.GameWon();
+            gameWon?.Invoke();
     }
 
     bool ArrayEqual(int[] first, int[] second)

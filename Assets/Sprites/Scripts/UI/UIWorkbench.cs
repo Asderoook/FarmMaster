@@ -10,6 +10,7 @@ public class UIWorkbench : MonoBehaviour
     public Inventory inventory { get; set; }
     public WbInventory wbInventory { get; set; }
     private float slotSize = 55;
+    public UIRecipes recipesUI { get; set; }
     private Transform itemSlotContainer;
     public Transform itemSlotTemplate;
 
@@ -96,6 +97,7 @@ public class UIWorkbench : MonoBehaviour
     {
         itemSlotContainer = transform.Find("itemSlotContainer");
         timer = transform.Find("timer").gameObject.GetComponent<Text>();
+        recipesUI = transform.Find("recipesUI").gameObject.GetComponent<UIRecipes>();
     }
 
     private void OnEnable()
