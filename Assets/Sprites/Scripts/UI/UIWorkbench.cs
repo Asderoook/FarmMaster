@@ -9,10 +9,10 @@ public class UIWorkbench : MonoBehaviour
     public Sprite buttonImage;
     public Inventory inventory { get; set; }
     public WbInventory wbInventory { get; set; }
-    private float slotSize = 55;
-    public UIRecipes recipesUI { get; set; }
+    private float slotSize = 50;
     private Transform itemSlotContainer;
     public Transform itemSlotTemplate;
+    public Transform itemSlottototo;
 
     public void AddGraphics()
     {
@@ -27,9 +27,9 @@ public class UIWorkbench : MonoBehaviour
         {
             RectTransform slotRectTransorm = Instantiate(itemSlotTemplate, itemSlotContainer).GetComponent<RectTransform>();
             DrawCell(slotRectTransorm,
-                new Vector2(x * slotSize, y * slotSize),
+                new Vector2(7 + x * slotSize, -2 + y * slotSize),
                 () => inventory.GiveItem(item),
-                () => inventory.RemoveItem(item),
+                () => inventory.GiveItem(item),
                 item.image);
             if (++x >= inventory.maxCount / 2 + inventory.maxCount % 2)
             {
@@ -39,7 +39,7 @@ public class UIWorkbench : MonoBehaviour
         }
         RectTransform buttonRectTransorm = Instantiate(itemSlotTemplate, itemSlotContainer).GetComponent<RectTransform>();
         DrawCell(buttonRectTransorm,
-            new Vector2(2 * slotSize, -0.5f * slotSize),
+            new Vector2(2.2f * slotSize, -0.5f * slotSize),
             () => {
                 if (wbInventory.canCraft)
                 {
@@ -48,30 +48,48 @@ public class UIWorkbench : MonoBehaviour
                         StartCoroutine(DrawTimer());
                 }
             },
-            () => {
-                wbInventory.EndCrafting();
-                StopAllCoroutines();
-                wbInventory.canCraft = true;
+            () =>
+            {
+                if (wbInventory.canCraft)
+                {
+                    wbInventory.StartCrafting();
+                    if (!wbInventory.canCraft)
+                        StartCoroutine(DrawTimer());
+                }
             },
             buttonImage);
         if (wbInventory.resultItem != null)
         {
             RectTransform slotRectTransorm = Instantiate(itemSlotTemplate, itemSlotContainer).GetComponent<RectTransform>();
             DrawCell(slotRectTransorm,
-                new Vector2(3 * slotSize, -0.5f * slotSize),
+                new Vector2(3.2f * slotSize, -0.5f * slotSize),
                 () => {
                     inventory.anotherInventory.AddItem(wbInventory.resultItem);
                     slotRectTransorm.gameObject.SetActive(false);
                     wbInventory.resultItem = null;
                     wbInventory.canCraft = true;
+                    AddGraphics();
                 },
                 () => {
+                    inventory.anotherInventory.AddItem(wbInventory.resultItem);
                     slotRectTransorm.gameObject.SetActive(false);
                     wbInventory.resultItem = null;
                     wbInventory.canCraft = true;
+                    AddGraphics();
                 },
                 wbInventory.resultItem.image);
             timer.text = wbInventory.timer.ToString() + "%";
+        }
+        else
+        {
+            var hnfjhfnjnnjnjnvijhnnkjdnjxmnjzsnkjdsnlcjna12345678909876543wnhcvvxghjlkfdhbdvfnjsabhygdudihsabjhvwqahjkbjdjdij = wbInventory.FindResultItem();
+            if (hnfjhfnjnnjnjnvijhnnkjdnjxmnjzsnkjdsnlcjna12345678909876543wnhcvvxghjlkfdhbdvfnjsabhygdudihsabjhvwqahjkbjdjdij != null)
+            {
+                var rt = Instantiate(itemSlottototo, itemSlotContainer).GetComponent<RectTransform>();
+                rt.gameObject.SetActive(true);
+                rt.anchoredPosition = new Vector2(3.2f * slotSize, -0.5f * slotSize);
+                rt.Find("Image").GetComponent<Image>().sprite = hnfjhfnjnnjnjnvijhnnkjdnjxmnjzsnkjdsnlcjna12345678909876543wnhcvvxghjlkfdhbdvfnjsabhygdudihsabjhvwqahjkbjdjdij.image;
+            }
         }
     }
 
@@ -97,7 +115,6 @@ public class UIWorkbench : MonoBehaviour
     {
         itemSlotContainer = transform.Find("itemSlotContainer");
         timer = transform.Find("timer").gameObject.GetComponent<Text>();
-        recipesUI = transform.Find("recipesUI").gameObject.GetComponent<UIRecipes>();
     }
 
     private void OnEnable()

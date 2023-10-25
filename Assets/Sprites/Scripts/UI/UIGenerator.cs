@@ -11,6 +11,7 @@ public class UIGenerator : MonoBehaviour
     private float slotSize = 55;
     private Transform itemSlotContainer;
     public Transform itemSlotTemplate;
+    public Transform itemSlottototo;
 
     public void AddGraphics()
     {
@@ -19,15 +20,9 @@ public class UIGenerator : MonoBehaviour
             if (child != itemSlotTemplate)
                 Destroy(child.gameObject);
         }
-        RectTransform TemplateRectTransorm = Instantiate(itemSlotTemplate, itemSlotContainer).GetComponent<RectTransform>();
-        DrawCell(TemplateRectTransorm,
-            new Vector2(0, -0.5f * slotSize),
-            () => { },
-            () => { },
-            generatorInventory.GetItem().image);
         RectTransform buttonRectTransorm = Instantiate(itemSlotTemplate, itemSlotContainer).GetComponent<RectTransform>();
         DrawCell(buttonRectTransorm,
-            new Vector2(2 * slotSize, -0.5f * slotSize),
+            new Vector2(1 * slotSize, -0.5f * slotSize),
             () => {
                 if (generatorInventory.canCraft)
                 {
@@ -37,29 +32,48 @@ public class UIGenerator : MonoBehaviour
                 }
             },
             () => {
-                generatorInventory.EndGenerating();
-                StopAllCoroutines();
-                generatorInventory.canCraft = true;
+                if (generatorInventory.canCraft)
+                {
+                    generatorInventory.StartGenerating();
+                    if (!generatorInventory.canCraft)
+                        StartCoroutine(DrawTimer());
+                }
             },
             buttonImage);
         if (generatorInventory.resultItem != null)
         {
             RectTransform slotRectTransorm = Instantiate(itemSlotTemplate, itemSlotContainer).GetComponent<RectTransform>();
             DrawCell(slotRectTransorm,
-                new Vector2(3 * slotSize, -0.5f * slotSize),
+                new Vector2(2 * slotSize, -0.5f * slotSize),
                 () => {
-                    generatorInventory.anotherInventory.AddItem(generatorInventory.resultItem);
-                    slotRectTransorm.gameObject.SetActive(false);
-                    generatorInventory.resultItem = null;
-                    generatorInventory.canCraft = true;
+                    if (generatorInventory.anotherInventory.canAdd)
+                    {
+                        generatorInventory.anotherInventory.AddItem(generatorInventory.resultItem);
+                        slotRectTransorm.gameObject.SetActive(false);
+                        generatorInventory.resultItem = null;
+                        generatorInventory.canCraft = true;
+                        AddGraphics();
+                    }
                 },
                 () => {
-                    slotRectTransorm.gameObject.SetActive(false);
-                    generatorInventory.resultItem = null;
-                    generatorInventory.canCraft = true;
+                    if (generatorInventory.anotherInventory.canAdd)
+                    {
+                        generatorInventory.anotherInventory.AddItem(generatorInventory.resultItem);
+                        slotRectTransorm.gameObject.SetActive(false);
+                        generatorInventory.resultItem = null;
+                        generatorInventory.canCraft = true;
+                        AddGraphics();
+                    }
                 },
                 generatorInventory.resultItem.image);
             timer.text = generatorInventory.timer.ToString() + "%";
+        }
+        else
+        {
+            var rt = Instantiate(itemSlottototo, itemSlotContainer).GetComponent<RectTransform>();
+            rt.gameObject.SetActive(true);
+            rt.anchoredPosition = new Vector2(2 * slotSize, -0.5f * slotSize);
+            rt.Find("Image").GetComponent<Image>().sprite = generatorInventory.GetItem().image;
         }
     }
 

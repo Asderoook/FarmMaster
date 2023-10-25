@@ -4,15 +4,26 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     public GameObject menu;
+    public GameObject levels;
+    public GameObject info;
 
     public void Play()
     {
-        SceneManager.LoadScene("Game");
+        menu.SetActive(false);
+        info.SetActive(false);
+        levels.SetActive(true);
+    }
+
+    public void PlayLevel(int number)
+    {
+        SceneManager.LoadScene("Game" + number);
     }
 
     public void Info()
     {
-
+        menu.SetActive(false);
+        levels.SetActive(false);
+        info.SetActive(true);
     }
 
     public void Exit()
@@ -22,7 +33,9 @@ public class MainMenu : MonoBehaviour
 
     public void BackToMenu()
     {
-
+        levels.SetActive(false);
+        info.SetActive(false);
+        menu.SetActive(true);
     }
 
     void Awake()

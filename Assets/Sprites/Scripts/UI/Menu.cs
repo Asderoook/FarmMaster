@@ -6,7 +6,8 @@ public class Menu : MonoBehaviour
     private GameObject pause;
     private GameObject pauseButton;
     private bool gamePaused;
-
+    public Timer timer;
+    private bool stopedggaggame = false;
     
     public void Pause()
     {
@@ -32,12 +33,24 @@ public class Menu : MonoBehaviour
 
     public void GameWin()
     {
-        Debug.Log("Win");
+        if (!stopedggaggame)
+        {
+            timer.SetSpeedup(0);
+            timer.SetText("You win!");
+            Pause();
+            stopedggaggame = true;
+        }
     }
 
     public void GameLose()
     {
-        Debug.Log("Lose");
+        if (!stopedggaggame)
+        {
+            timer.SetSpeedup(0);
+            timer.SetText("You Lose");
+            Pause();
+            stopedggaggame = true;
+        }
     }
 
     void Update()

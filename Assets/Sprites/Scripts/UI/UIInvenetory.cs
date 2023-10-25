@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class UIInvenetory : MonoBehaviour
 {
-    private float slotSize = 55;
+    private float slotSize = 50;
     public Inventory inventory { get; set; }
     private Transform itemSlotContainer;
     public Transform itemSlotTemplate;
@@ -21,9 +21,9 @@ public class UIInvenetory : MonoBehaviour
         {
             RectTransform slotRectTransorm = Instantiate(itemSlotTemplate, itemSlotContainer).GetComponent<RectTransform>();
             slotRectTransorm.gameObject.SetActive(true);
-            slotRectTransorm.anchoredPosition = new Vector2(x * slotSize, y * slotSize);
+            slotRectTransorm.anchoredPosition = new Vector2(7 + x * slotSize, -2 + y * slotSize);
             slotRectTransorm.gameObject.GetComponent<InventoryButton>().onLeftClick = () => inventory.GiveItem(item);
-            slotRectTransorm.gameObject.GetComponent<InventoryButton>().onRightClick = () => inventory.RemoveItem(item);
+            slotRectTransorm.gameObject.GetComponent<InventoryButton>().onRightClick = () => inventory.GiveItem(item);
             slotRectTransorm.Find("image").GetComponent<Image>().sprite = item.image;
             x++;
             if (x >= inventory.maxCount / 2 + inventory.maxCount % 2)

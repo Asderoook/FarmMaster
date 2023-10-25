@@ -3,9 +3,9 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
-    public float gameTime;
     public Menu menu;
-    private float remainingTime;
+    private float remainingPercent;
+    private float speedup;
     private Text text;
 
     private void Awake()
@@ -15,15 +15,34 @@ public class Timer : MonoBehaviour
 
     void Start()
     {
-        remainingTime = gameTime;
+        remainingPercent = 100;
+        speedup = 0.3f;
     }
 
     void Update()
     {
-        remainingTime -= Time.deltaTime;
-        if (remainingTime <= 0)
-            menu.GameLose();
-        var roundedTime = (int)Mathf.Round(remainingTime);
-        text.text = string.Format("{0}:{1:D2}", (roundedTime / 60).ToString(), roundedTime % 60);
+        if (speedup != 0)
+        {
+            remainingPercent -= Time.deltaTime * speedup;
+            var roundedTime = (int)Mathf.Round(remainingPercent);
+            text.text = string.Format("{0}%", (roundedTime));
+            if (remainingPercent <= 0)
+                menu.GameLose();
+        }
+    }
+
+    public void AddPercent(float percent)
+    {
+        remainingPercent = Mathf.Min(remainingPercent + percent, 100);
+    }
+
+    public void SetSpeedup(float newspeedup)
+    {
+        speedup = newspeedup;
+    }
+
+    public void SetText(string newText)
+    {
+        text.text = newText;
     }
 }

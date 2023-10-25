@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    private float slotSize = 55;
+    private float slotSize = 50;
     public Inventory inventory { get; set; }
     public ManagerInventory managerInventory { get; set; }
     public Sprite buttonImage;
@@ -19,32 +19,21 @@ public class UIManager : MonoBehaviour
                 Destroy(child.gameObject);
         }
         var x = 0;
-        foreach (var item in managerInventory.GetItems())
-        {
-            RectTransform slotRectTransorm = Instantiate(itemSlotTemplate, itemSlotContainer).GetComponent<RectTransform>();
-            DrawCell(slotRectTransorm,
-                new Vector2(x * slotSize, 0),
-                () => { },
-                () => { },
-                item.image);
-            x++;
-        }
-        x = 0;
         foreach (Item item in inventory.GetItems())
         {
             RectTransform slotRectTransorm = Instantiate(itemSlotTemplate, itemSlotContainer).GetComponent<RectTransform>();
             DrawCell(slotRectTransorm,
-                new Vector2(x * slotSize, -2 * slotSize),
+                new Vector2(12 + 1.1f * x * slotSize, -1 * slotSize),
                 () => inventory.GiveItem(item),
-                () => inventory.RemoveItem(item),
+                () => inventory.GiveItem(item),
                 item.image);
             x++;
         }
         RectTransform buttonRectTransorm = Instantiate(itemSlotTemplate, itemSlotContainer).GetComponent<RectTransform>();
         DrawCell(buttonRectTransorm,
-            new Vector2(1.5f * slotSize, -1 * slotSize),
+            new Vector2(3f * slotSize, -1 * slotSize),
             () => { managerInventory.CheckWin(); },
-            () => { },
+            () => { managerInventory.CheckWin(); },
             buttonImage);
     }
 

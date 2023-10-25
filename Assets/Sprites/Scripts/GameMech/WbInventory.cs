@@ -26,6 +26,14 @@ public class WbInventory : MonoBehaviour
         itemChanged?.Invoke();
     }
 
+    public Item FindResultItem()
+    {
+        var result = craftSystem.GetRecipe();
+        if (result != null)
+            return dataBase.dataBase[result.resultID];
+        return null;
+    }
+
     public void EndCrafting()
     {
         StopAllCoroutines();

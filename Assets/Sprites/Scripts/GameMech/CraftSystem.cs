@@ -8,6 +8,23 @@ public class CraftSystem : MonoBehaviour
     private DataCrafts dataCrafts;
     private Inventory inventory;
 
+    public Recipe GetRecipe()
+    {
+        var items = inventory.items;
+        if (items.Count == 0)
+            return null;
+        var materials = new int[items.Count];
+        for (var i = 0; i < items.Count; i++)
+            materials[i] = items[i].id;
+        System.Array.Sort(materials);
+        foreach (var recipe in dataCrafts.dataCrafts)
+            if (ArrayEqual(recipe.materialsID, materials))
+            {
+                return recipe;
+            }
+        return null;
+    }
+
     public Recipe Craft()
     {
         var items = inventory.items;

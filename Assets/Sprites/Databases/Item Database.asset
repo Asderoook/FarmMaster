@@ -14,17 +14,50 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dataBase:
   - id: 0
-    itemName: HelloWorld
-    image: {fileID: -722584001, guid: 1b93a918d8d0a0842a54d70cb8e337f7, type: 3}
+    itemName: Ingot
+    image: {fileID: 858388975, guid: 30a0e8831915671479d5068a7a7a5de2, type: 3}
   - id: 1
-    itemName: First
-    image: {fileID: 21300136, guid: c3a40e1c46727b94e959990527f8e7fa, type: 3}
+    itemName: Transistor
+    image: {fileID: -152546890, guid: 30a0e8831915671479d5068a7a7a5de2, type: 3}
   - id: 2
-    itemName: Second
-    image: {fileID: 21300148, guid: c3a40e1c46727b94e959990527f8e7fa, type: 3}
+    itemName: Battary
+    image: {fileID: 1116653904, guid: 8133919492e14d542bffb864e16f9808, type: 3}
   - id: 3
-    itemName: Third
-    image: {fileID: 21300152, guid: 29c9cded5e558164aaf8c9bf08aa1510, type: 3}
+    itemName: BluePlate
+    image: {fileID: -2071351920, guid: 8133919492e14d542bffb864e16f9808, type: 3}
   - id: 4
-    itemName: 4th
-    image: {fileID: 21300042, guid: 29c9cded5e558164aaf8c9bf08aa1510, type: 3}
+    itemName: GreenPlate
+    image: {fileID: 1757223381, guid: 8133919492e14d542bffb864e16f9808, type: 3}
+  - id: 5
+    itemName: BlueOre
+    image: {fileID: 1655387340, guid: 30a0e8831915671479d5068a7a7a5de2, type: 3}
+  - id: 6
+    itemName: GreenOre
+    image: {fileID: -112544367, guid: 30a0e8831915671479d5068a7a7a5de2, type: 3}
+  - id: 7
+    itemName: OrangeOre
+    image: {fileID: 113168129, guid: 30a0e8831915671479d5068a7a7a5de2, type: 3}
+  - id: 8
+    itemName: YellowOre
+    image: {fileID: 2120745709, guid: 30a0e8831915671479d5068a7a7a5de2, type: 3}
+  - id: 9
+    itemName: GreyOre
+    image: {fileID: 920783739, guid: 30a0e8831915671479d5068a7a7a5de2, type: 3}
+  - id: 10
+    itemName: Gear
+    image: {fileID: 2078012005, guid: 8133919492e14d542bffb864e16f9808, type: 3}
+  - id: 11
+    itemName: Wire
+    image: {fileID: -1433100866, guid: 8133919492e14d542bffb864e16f9808, type: 3}
+  - id: 12
+    itemName: Microchip
+    image: {fileID: 1312605568, guid: 8133919492e14d542bffb864e16f9808, type: 3}
+  - id: 13
+    itemName: GreenArrow
+    image: {fileID: -1259044614, guid: 8133919492e14d542bffb864e16f9808, type: 3}
+  - id: 14
+    itemName: YellowArrow
+    image: {fileID: 1658651552, guid: 8133919492e14d542bffb864e16f9808, type: 3}
+  - id: 15
+    itemName: RedArrow
+    image: {fileID: -1788290235, guid: 8133919492e14d542bffb864e16f9808, type: 3}
